@@ -14,7 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @NamedQueries({
   @NamedQuery(name = "ApplicationUser.findByEmail", query = "SELECT u FROM ApplicationUser u WHERE u.email = :email")
 })
-public class ApplicationUser {
+public class UserApplication {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,3 +62,4 @@ public class ApplicationUser {
     this.nickname = nickname;
   }
 }
+
