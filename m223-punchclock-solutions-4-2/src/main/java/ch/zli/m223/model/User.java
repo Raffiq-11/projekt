@@ -41,7 +41,13 @@ public class User {
   @OneToMany(mappedBy="user")
   private Set<Booking> booking;
 
+public Long getUserId() {
+    return userId;
+}
 
+public void setUserId(Long userId) {
+    this.userId = userId;
+}
 
 public String getFirstname() {
     return firstname;
@@ -83,14 +89,6 @@ public void setActive(Boolean active) {
     this.active = active;
 }
 
-public Long getUserId() {
-    return userId;
-}
-
-public void setUserId(Long userId) {
-    this.userId = userId;
-}
-
 public Boolean getIsAdmin() {
     return isAdmin;
 }
@@ -98,6 +96,16 @@ public Boolean getIsAdmin() {
 public void setIsAdmin(Boolean isAdmin) {
     this.isAdmin = isAdmin;
 }
+
+public Set<Booking> getBooking() {
+    return booking;
+}
+
+public void setBooking(Set<Booking> booking) {
+    this.booking = booking;
+}
+
+
 
 
 }

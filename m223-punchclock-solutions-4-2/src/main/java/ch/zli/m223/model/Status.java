@@ -27,7 +27,6 @@ public class Status {
   @JoinColumn(name = "bookingId", referencedColumnName = "bookingId")
   private Booking booking;
 
-  
 public Long getStatusId() {
     return statusId;
 }
@@ -51,7 +50,8 @@ public Booking getBooking() {
 public void setBooking(Booking booking) {
     this.booking = booking;
 }
- 
+
+  
 
 }
 
