@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
-import ch.zli.m223.model.User;
+import ch.zli.m223.model.ApplicationUser;
 import ch.zli.m223.service.UserService;
 
 
@@ -37,7 +37,7 @@ public class UserController {
       summary = "Index all users.", 
       description = "Returns a list of all users."
   )
-  public List<User> index() {
+  public List<ApplicationUser> index() {
       return userService.findAll();
   }
 
@@ -48,7 +48,7 @@ public class UserController {
       summary = "Get a single users.", 
       description = "Gets an user by its id."
   )
-  public Optional<User> findById(@PathParam("id") Long id) {
+  public Optional<ApplicationUser> findById(@PathParam("id") Long id) {
     return userService.findUserById(id);
 }
 
@@ -60,7 +60,7 @@ public class UserController {
       description = "Creates a new user and returns the newly added user."
   )
   @PermitAll
-  public User create(User user) {
+  public ApplicationUser create(ApplicationUser user) {
      return userService.createUser(user);
   }
 
@@ -80,7 +80,7 @@ public class UserController {
       summary = "Updates an user.",
       description = "Updates an user by its id."
   )
-  public User update(@PathParam("id") Long id, User user) {
+  public ApplicationUser update(@PathParam("id") Long id, ApplicationUser user) {
       return userService.updateUser(id, user);
   }
 }

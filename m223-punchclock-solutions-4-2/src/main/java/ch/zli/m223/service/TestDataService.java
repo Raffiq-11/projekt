@@ -1,7 +1,6 @@
 package ch.zli.m223.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -12,11 +11,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import ch.zli.m223.model.Booking;
-import ch.zli.m223.model.Category;
-import ch.zli.m223.model.Entry;
 import ch.zli.m223.model.Status;
-import ch.zli.m223.model.Tag;
-import ch.zli.m223.model.User;
+import ch.zli.m223.model.ApplicationUser;
 import io.quarkus.arc.profile.IfBuildProfile;
 import io.quarkus.runtime.StartupEvent;
 
@@ -36,7 +32,7 @@ public class TestDataService {
 
     
     // Users
-    var firstUser = new User();
+    var firstUser = new ApplicationUser();
     firstUser.setFirstname("Peter");
     firstUser.setLastname("Bauer");
     firstUser.setEmail("peter@gmail.com");
@@ -47,7 +43,7 @@ public class TestDataService {
     entityManager.persist(firstUser);
 
 
-    var secondUser = new User();
+    var secondUser = new ApplicationUser();
     secondUser.setFirstname("Hans");
     secondUser.setLastname("kuh");
     secondUser.setEmail("hans@gmail.com");
@@ -59,7 +55,7 @@ public class TestDataService {
 
 
 
-    var thirdUser = new User();
+    var thirdUser = new ApplicationUser();
     thirdUser.setFirstname("Admin");
     thirdUser.setLastname("Admin123");
     thirdUser.setEmail("Admin.service@gmail.com");
@@ -117,56 +113,5 @@ public class TestDataService {
    thirdBooking.setStatus(thirdStatus);
    entityManager.persist(thirdBooking);
 
-
-
-
-
-    // Categories
-    var projectACategory = new Category();
-    projectACategory.setTitle("Project A");
-    entityManager.persist(projectACategory);
-
-    var projectBCategory = new Category();
-    projectBCategory.setTitle("Project B");
-    entityManager.persist(projectBCategory);
-
-    var projectCCategory = new Category();
-    projectCCategory.setTitle("Project C");
-    entityManager.persist(projectCCategory);
-
-    // Tags
-    var programmingTag = new Tag();
-    programmingTag.setTitle("Programming");
-    entityManager.persist(programmingTag);
-
-    var debuggingTag = new Tag();
-    debuggingTag.setTitle("Debugging");
-    entityManager.persist(debuggingTag);
-
-    var meetingTag = new Tag();
-    meetingTag.setTitle("Meeting");
-    entityManager.persist(meetingTag);
-
-    // Entries
-    var firstEntry = new Entry();
-    firstEntry.setCategory(projectACategory);
-    firstEntry.setTags(new HashSet<>(Arrays.asList(programmingTag, debuggingTag)));
-    firstEntry.setCheckIn(LocalDateTime.now().minusHours(3));
-    firstEntry.setCheckOut(LocalDateTime.now().minusHours(2));
-    entityManager.persist(firstEntry);
-
-    var secondEntry = new Entry();
-    secondEntry.setCategory(projectACategory);
-    secondEntry.setTags(new HashSet<>(Arrays.asList(meetingTag)));
-    secondEntry.setCheckIn(LocalDateTime.now().minusHours(2));
-    secondEntry.setCheckOut(LocalDateTime.now().minusHours(1));
-    entityManager.persist(secondEntry);
-
-    var thirdEntry = new Entry();
-    thirdEntry.setCategory(projectBCategory);
-    thirdEntry.setTags(new HashSet<>(Arrays.asList(programmingTag)));
-    thirdEntry.setCheckIn(LocalDateTime.now().minusHours(1));
-    thirdEntry.setCheckOut(LocalDateTime.now());
-    entityManager.persist(thirdEntry);
   }
 }

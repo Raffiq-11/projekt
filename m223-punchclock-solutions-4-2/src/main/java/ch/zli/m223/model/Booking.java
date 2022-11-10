@@ -20,17 +20,15 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Booking.findBookingById", query = "SELECT u FROM User u WHERE u.bookingId = :id")
+    @NamedQuery(name = "Booking.findBookingById", query = "SELECT u FROM Booking u WHERE u.bookingId = :id")
   })
-@Table(name = "booking")
+@Table(name = "Booking")
 public class Booking {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Schema(readOnly = true)
   private Long bookingId;
 
-  @Size(min = 10, max = 10, message 
-      = "Date must be 10 characters")
   @Column(nullable = false)
   private LocalDate date;
   
@@ -45,7 +43,7 @@ public class Booking {
 
   @ManyToOne
   @JoinColumn(name="userId", nullable=false)
-  private User user;
+  private ApplicationUser user;
 
   
   @OneToOne(mappedBy = "booking")
@@ -105,12 +103,12 @@ public void setIsAccepted(Boolean isAccepted) {
 }
 
 
-public User getUser() {
+public ApplicationUser getUser() {
     return user;
 }
 
 
-public void setUser(User user) {
+public void setUser(ApplicationUser user) {
     this.user = user;
 }
 

@@ -11,7 +11,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 
 import ch.zli.m223.model.Credential;
-import ch.zli.m223.model.User;
+import ch.zli.m223.model.ApplicationUser;
 import io.smallrye.jwt.build.Jwt;
 
 @ApplicationScoped
@@ -21,7 +21,7 @@ public class SessionService {
   UserService userService;
 
   public Response authenticate(Credential credential) {
-    Optional<User> principal = userService.findByEmail(credential.getEmail());
+    Optional<ApplicationUser> principal = userService.findByEmail(credential.getEmail());
 
     try {
       if (principal.isPresent() && principal.get().getPassword().equals(credential.getPassword())) {

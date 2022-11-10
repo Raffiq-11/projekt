@@ -16,9 +16,9 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "Status.findStatusById", query = "SELECT u FROM User u WHERE u.statusId = :id")
+    @NamedQuery(name = "Status.findStatusById", query = "SELECT u FROM Status u WHERE u.statusId = :id")
   })
-@Table(name = "status")
+@Table(name = "Status")
 public class Status {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

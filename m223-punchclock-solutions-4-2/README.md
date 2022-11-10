@@ -1,6 +1,17 @@
-# Übungsprojekt: Punch Clock
+# Übungsprojekt: Multiuser Applikation
 
-Punch Clock ist ein Zeiterfassungssystem, welches mit Quarkus entwickelt wird.
+Mein Projekt ist eine Mutliuser Applikation, welches mit Quarkus entwickelt wird.
+Dieses Projekt besteht aus 3 Tabellen. 
+1. Status
+2. ApplicationUser
+3. Booking
+
+Diese Teile haben jeweils die gleichen Endpunkte im Controller. 
+POST
+GET
+DELETE
+PUT
+GET (get single value)
 
 ## Erste Schritte
 

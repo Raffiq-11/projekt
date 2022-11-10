@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.User;
+import ch.zli.m223.model.ApplicationUser;
 
 @ApplicationScoped
 public class UserService {
@@ -16,38 +16,38 @@ public class UserService {
     EntityManager entityManager;    
 
     @Transactional
-    public User createUser(User user) {
+    public ApplicationUser createUser(ApplicationUser user) {
         return entityManager.merge(user);
     }
 
     @Transactional
     public void deleteUser(Long id) {
-        var entity = entityManager.find(User.class, id);
+        var entity = entityManager.find(ApplicationUser.class, id);
         entityManager.remove(entity);
     }
 
     @Transactional
-    public User updateUser(Long id, User user) {
+    public ApplicationUser updateUser(Long id, ApplicationUser user) {
         user.setUserId(id);
         return entityManager.merge(user);
     }
 
-    public List<User> findAll() {
-        var query = entityManager.createQuery("FROM User", User.class);
+    public List<ApplicationUser> findAll() {
+        var query = entityManager.createQuery("FROM ApplicationUser", ApplicationUser.class);
         return query.getResultList();
     }
 
-    public Optional<User> findUserById(Long id) {
+    public Optional<ApplicationUser> findUserById(Long id) {
         return entityManager
-                .createNamedQuery("User.findUserById", User.class)
+                .createNamedQuery("ApplicationUser.findUserById", ApplicationUser.class)
                 .setParameter("id", id)
                 .getResultStream()
                 .findFirst();
     }
 
-    public Optional<User> findByEmail(String email) {
+    public Optional<ApplicationUser> findByEmail(String email) {
         return entityManager
-                .createNamedQuery("User.findByEmail", User.class)
+                .createNamedQuery("ApplicationUser.findByEmail", ApplicationUser.class)
                 .setParameter("email", email)
                 .getResultStream()
                 .findFirst();
