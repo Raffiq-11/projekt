@@ -34,7 +34,7 @@ public class TestDataService {
     var secondBooking = new Booking();
     var thirdBooking = new Booking();
 
-
+    
     // Users
     var firstUser = new User();
     firstUser.setFirstname("Peter");

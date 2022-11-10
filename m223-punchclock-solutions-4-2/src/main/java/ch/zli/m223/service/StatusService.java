@@ -1,13 +1,13 @@
 package ch.zli.m223.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.Category;
 import ch.zli.m223.model.Status;
 
 @ApplicationScoped
@@ -35,5 +35,13 @@ public class StatusService {
     public List<Status> findAll() {
         var query = entityManager.createQuery("FROM Status", Status.class);
         return query.getResultList();
+    }
+
+    public Optional<Status> findStatusById(Long id) {
+        return entityManager
+                .createNamedQuery("Status.findStatusById", Status.class)
+                .setParameter("id", id)
+                .getResultStream()
+                .findFirst();
     }
 }

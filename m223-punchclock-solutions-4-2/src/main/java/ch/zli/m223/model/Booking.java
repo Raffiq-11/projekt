@@ -9,13 +9,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "Booking.findBookingById", query = "SELECT u FROM User u WHERE u.bookingId = :id")
+  })
 @Table(name = "booking")
 public class Booking {
   @Id
@@ -23,7 +29,8 @@ public class Booking {
   @Schema(readOnly = true)
   private Long bookingId;
 
-
+  @Size(min = 10, max = 10, message 
+      = "Date must be 10 characters")
   @Column(nullable = false)
   private LocalDate date;
   

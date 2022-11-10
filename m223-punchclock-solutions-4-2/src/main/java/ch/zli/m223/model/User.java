@@ -5,14 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 
 import java.util.Set;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name = "User.findUserById", query = "SELECT u FROM User u WHERE u.userId = :id")
+  })
 @Table(name="User")
 public class User {
   @Id
@@ -20,15 +27,24 @@ public class User {
   @Schema(readOnly = true)
   private Long userId;
 
+  @Size(min = 1, max = 50, message 
+      = "Firstname must be between 1 and 50 characters")
   @Column(nullable = false)
   private String firstname;
 
+  @Size(min = 1, max = 50, message 
+      = "Lastname must be between 1 and 50 characters")
   @Column(nullable = false)
   private String lastname;
   
+  @Size(min = 5, max = 60, message 
+      = "Email must be between 5 and 60 characters")
+  @Email(message = "Email should be valid")
   @Column(nullable = false, unique = true)
   private String email;
 
+  @Size(min = 1, max = 200, message 
+      = "Password must be between 1 and 200 characters")
   @Column(nullable = false)
   private String password;
 

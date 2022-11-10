@@ -1,6 +1,7 @@
 package ch.zli.m223.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -8,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import ch.zli.m223.model.Booking;
-import ch.zli.m223.model.Category;
 
 @ApplicationScoped
 public class BookingService {
@@ -35,5 +35,13 @@ public class BookingService {
     public List<Booking> findAll() {
         var query = entityManager.createQuery("FROM Booking", Booking.class);
         return query.getResultList();
+    }
+
+    public Optional<Booking> findBookingById(Long id) {
+        return entityManager
+                .createNamedQuery("Booking.findBookingById", Booking.class)
+                .setParameter("id", id)
+                .getResultStream()
+                .findFirst();
     }
 }

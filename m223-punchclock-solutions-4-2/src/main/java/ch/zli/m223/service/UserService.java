@@ -8,13 +8,12 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.ApplicationUser;
 import ch.zli.m223.model.User;
 
 @ApplicationScoped
 public class UserService {
     @Inject
-    EntityManager entityManager;
+    EntityManager entityManager;    
 
     @Transactional
     public User createUser(User user) {
@@ -38,11 +37,19 @@ public class UserService {
         return query.getResultList();
     }
 
-    /*public Optional<ApplicationUser> findByEmail(String email) {
+    public Optional<User> findUserById(Long id) {
         return entityManager
-                .createNamedQuery("ApplicationUser.findByEmail", ApplicationUser.class)
+                .createNamedQuery("User.findUserById", User.class)
+                .setParameter("id", id)
+                .getResultStream()
+                .findFirst();
+    }
+
+    public Optional<User> findByEmail(String email) {
+        return entityManager
+                .createNamedQuery("User.findByEmail", User.class)
                 .setParameter("email", email)
                 .getResultStream()
                 .findFirst();
-    }*/
+    }
 }
